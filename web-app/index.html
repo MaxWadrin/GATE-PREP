@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GATE Prep War Room</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="logo">
+                <h1>GATE <span class="highlight">WAR ROOM</span></h1>
+                <p class="subtitle">AIR < 200 Protocol</p>
+            </div>
+            <div class="countdown-container">
+                <div class="countdown-item">
+                    <span id="days-left" class="count">00</span>
+                    <span class="label">Days Left</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-grid">
+            <!-- Navigation Tabs -->
+            <nav class="nav-tabs">
+                <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+                <button class="tab-btn" data-tab="roadmap">Roadmap</button>
+                <button class="tab-btn" data-tab="tracker">Syllabus Tracker</button>
+                <button class="tab-btn" data-tab="errors">Error Log</button>
+                <button class="tab-btn" data-tab="feedback" style="color: var(--accent-warning);">💬 Dev
+                    Feedback</button>
+            </nav>
+
+            <!-- Dashboard View -->
+            <section id="dashboard-view" class="view-section active">
+                <!-- Shift Selector -->
+                <div class="shift-selector-container">
+                    <label for="shift-select">Select Your Shift:</label>
+                    <select id="shift-select">
+                        <option value="">-- Choose Shift --</option>
+                        <option value="5am-1pm">Early (5 AM - 1 PM)</option>
+                        <option value="11am-7pm">Mid (11 AM - 7 PM)</option>
+                        <option value="1pm-9pm">Late (1 PM - 9 PM)</option>
+                        <option value="4pm-12am">Night (4 PM - 12 AM)</option>
+                    </select>
+                </div>
+
+                <!-- Daily Plan Card -->
+                <section class="card daily-plan-card" id="daily-plan-card" style="display: none;">
+                    <div class="card-header">
+                        <h2>📅 Today's Smart Plan</h2>
+                        <div class="daily-progress-container">
+                            <span id="daily-progress-text">0/0 Completed</span>
+                            <div class="daily-progress-track">
+                                <div id="daily-progress-fill" class="daily-progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="study-windows">
+                        <h4>Study Windows</h4>
+                        <div id="study-windows-list" class="windows-list"></div>
+                    </div>
+                    <div class="daily-tasks">
+                        <h4>Tasks</h4>
+                        <div id="daily-tasks-list" class="daily-tasks-list"></div>
+                    </div>
+                </section>
+
+                <!-- Current Status Card -->
+                <section class="card status-card">
+                    <h2>Current Status</h2>
+                    <div class="status-content">
+                        <div class="week-display">
+                            <span class="label">Current Week</span>
+                            <h3 id="current-week-title">Loading...</h3>
+                        </div>
+                        <div class="focus-display">
+                            <span class="label">Focus</span>
+                            <p id="current-focus">Loading...</p>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-info">
+                            <span>Syllabus Completion</span>
+                            <span id="completion-percentage">0%</span>
+                        </div>
+                        <div class="progress-track">
+                            <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Revision Dashboard -->
+                <section class="card revision-card">
+                    <div class="card-header">
+                        <h2>🧠 Smart Revision (SRS 2.0)</h2>
+                        <div class="revision-filters">
+                            <button class="filter-btn active" data-filter="today">Today</button>
+                            <button class="filter-btn" data-filter="tomorrow">Tomorrow</button>
+                            <button class="filter-btn" data-filter="all">All</button>
+                            <input type="date" id="revision-date-filter" class="filter-date">
+                        </div>
+                    </div>
+                    <div id="revision-list" class="revision-list">
+                        <!-- Revision items will be injected here -->
+                        <p class="empty-state">No revisions due today. Keep grinding!</p>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Roadmap View -->
+            <section id="roadmap-view" class="view-section">
+                <div class="roadmap-container">
+                    <h2>🚀 9-Week Battle Plan</h2>
+                    <div id="roadmap-timeline" class="timeline">
+                        <!-- Timeline items injected here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tracker View -->
+            <section id="tracker-view" class="view-section">
+                <div id="syllabus-container" class="syllabus-list">
+                    <!-- Syllabus items will be injected here -->
+                </div>
+            </section>
+
+            <!-- Error Log View -->
+            <section id="errors-view" class="view-section">
+                <div class="error-form-container">
+                    <h3>Log New Error (Reconsolidation Engine)</h3>
+                    <form id="error-form">
+                        <div class="form-group">
+                            <input type="date" id="error-date" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="error-topic" placeholder="Topic (e.g., Op-Amps)" required>
+                        </div>
+                        <div class="form-group">
+                            <select id="error-type" required>
+                                <option value="Concept">Conceptual Error</option>
+                                <option value="Calculation">Calculation Mistake</option>
+                                <option value="Silly">Silly Mistake</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <textarea id="error-reason" placeholder="Why was it wrong? Correction strategy..."
+                                required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Retest Date (48 hrs later)</label>
+                            <input type="date" id="error-retest-date" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Log Error & Schedule Retest</button>
+                    </form>
+                </div>
+                <div class="error-list-container">
+                    <h3>Pending Retests</h3>
+                    <div id="error-list" class="error-list">
+                        <!-- Errors will be injected here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Feedback View -->
+            <section id="feedback-view" class="view-section">
+                <div class="feedback-container">
+                    <div class="card">
+                        <h2>💬 Developer Feedback Log</h2>
+                        <p style="color:var(--text-secondary); margin-bottom:1rem;">
+                            Spot a bug? Want a feature? Log it here, then click "Copy for Agent" to send it to me!
+                        </p>
+
+                        <form id="feedback-form" style="margin-bottom:2rem;">
+                            <div class="form-group">
+                                <textarea id="feedback-input"
+                                    placeholder="Type your feedback here... (e.g., 'The heatmap colors are too bright')"
+                                    style="width:100%; height:100px; padding:1rem; border-radius:8px; background:var(--bg-primary); border:1px solid var(--border-color); color:var(--text-primary);"
+                                    required></textarea>
+                            </div>
+                            <div style="display:flex; gap:1rem;">
+                                <button type="submit" class="btn-primary"
+                                    style="background:var(--accent-primary); border:none; padding:0.5rem 1.5rem; border-radius:6px; color:white; cursor:pointer;">Add
+                                    Comment</button>
+                                <button type="button" onclick="copyFeedback()" class="btn-secondary"
+                                    style="background:var(--bg-secondary); border:1px solid var(--border-color); padding:0.5rem 1.5rem; border-radius:6px; color:var(--text-primary); cursor:pointer;">📋
+                                    Copy for Agent</button>
+                            </div>
+                        </form>
+
+                        <div id="feedback-list" class="feedback-list">
+                            <!-- Comments injected here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="scripts/syllabus_data.js"></script>
+    <script src="scripts/db.js"></script>
+    <script src="scripts/data.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+
+</html>
